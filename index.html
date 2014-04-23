@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <title> Workshop </title>
+    <style>
+        body {
+            font-family: 'Source Sans Pro', 'sans-serif';
+            font-weight: 300;
+            padding: 0px;
+            margin: 0px;
+        }
+        p {
+            font-weight: 300;
+            font-size: 16px;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            color: #666666;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 48px;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            color: #ef773a;
+        }
+        h2 {
+            font-weight: 700;
+            font-size: 36px;
+            text-align: center;
+            padding-top: 10px;
+            margin: 0px;
+            color: #CCCCCC;
+        }
+        #background {
+            position: fixed;
+            z-index: -99;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background: url('banner.jpg');
+            background-size: cover;
+        }
+        #navbar {
+            position: fixed;
+            z-index: 99;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            padding: 25px;
+            height: 100px;
+            background: transparent;
+        }
+        #logo {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 101;
+            width: 50px;
+            height: 50px;
+            background: url('logo.svg');
+            background-size: cover;
+        }
+        #logo:hover {
+            cursor: pointer;
+        }
+        #logo-title {
+            position: fixed;
+            top: 25px;
+            left: 80px;
+            display: block;
+            z-index: 102;
+            font-weight: 600;
+            font-size: 36px;
+            color: #ef773a;
+            letter-spacing: -1px;
+            overflow: hidden;
+            width: 150px;
+            transition: width 1s;
+            -webkit-transition: width 1s;
+        }
+        .link {
+            float: right;
+            margin-left: 25px;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #CCCCCC;
+            border-radius: 25px;
+        }
+        .inner-link {
+            display: block;
+            margin: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            -webkit-transition: opacity 0.5s;
+        }
+        .inner-link:hover {
+            cursor: pointer;
+            opacity: 1 !important;
+        }
+        .container {
+            width: 100%;
+            float: left;
+            background: #FFF;
+        }
+        .content {
+            width: 1000px;
+            padding: 100px;
+            margin: auto;
+        }
+        #spacer1 {
+            height: 50px;
+        }
+        #banner-header {
+            text-align: center;
+            margin: auto;
+            font-size: 36px;
+            color: #666666;
+        }
+        .highlight {
+            color: #ef773a;
+            font-weight: 600;
+        }
+        #banner {
+            float: left;
+            width: 100%;
+            height: 600px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        #banner-logo {
+            display: block;
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .blurb {
+            padding: 25px;
+            padding-left: 100px;
+            padding-right: 100px;
+            line-height: 2em;
+        }
+        .picture {
+            float: left;
+            width: 50%;
+            border-top: 1px solid #CCCCCC;
+            height: 599px;
+            background: url('picture.jpg');
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 2s;
+            -webkit-transition: opacity 2s;
+        }
+        .description {
+            float: left;
+            text-align: center;
+            border-top: 1px solid #CCCCCC;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 50%;
+            height: 599px;
+            opacity: 0;
+            padding: 5%;
+            transition: opacity 2s;
+            -webkit-transition: opacity 2s;
+        }
+        .button {
+            padding: 25px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: 1px solid #CCCCCC;
+            font-weight: 600;
+            font-size: 24px;
+            color: #CCCCCC;
+            text-decoration: none;
+            transition: 1s;
+            -webkit-transition: 1s;
+        }
+        .mobile {
+            display: none;
+        }
+        @media (max-width: 1400px) {
+            .description {
+                padding: 0px;
+                padding-top: 75px;
+            }
+        }
+        @media (max-width: 1000px) {
+            .link {
+                display: none;
+            }
+            .content, .description, .picture {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                width: 100%;
+                opacity: 1;
+            }
+            .picture {
+                display: none;
+            }
+            .mobile {
+                display: block;
+            }
+            #top {
+                position: absolute;
+                top: 0px;
+                opacity: 0;
+            }
+        }
+    </style>
+    <script src="typed.js"></script>
+    <style>
+        #typed-cursor{
+            opacity: 1;
+            font-weight: 100;
+            animation: blink 0.7s infinite;
+            -webkit-animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity:1; }
+            50% { opacity:0; }
+            100% { opacity:1; }
+        }
+        
+        @-webkit-keyframes blink {
+            0% { opacity:1; }
+            50% { opacity:0; }
+            100% { opacity:1; }
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#typed").typed({
+            strings: ["tasks.", "event check in.", "approvals.", "business management.", "Salesforce1."],
+            typeSpeed: 100, // typing speed
+            backDelay: 1000, // pause before backspacing
+            callback: function(){ } // call function after typing is done
+            });
+        });
+    </script>
+    <script>
+        $(document).scroll(function(){
+            var scrollBottom = $(this).scrollTop() + $(window).height();
+            if($(this).scrollTop() > 150)
+            {   
+                $('#logo-title').css({"width":"0px"});
+            } else {
+                $('#logo-title').css({"width":"150px"});
+            }
+            if(scrollBottom > 1400)
+            {   
+                $('.one').css({"opacity":"1"});
+            }
+            if(scrollBottom > 2000)
+            {   
+                $('.two').css({"opacity":"1"});
+            }
+            if(scrollBottom > 2600)
+            {   
+                $('.three').css({"opacity":"1"});
+            }
+            if(scrollBottom > 3200)
+            {   
+                $('.four').css({"opacity":"1"});
+            }
+            if($(this).scrollTop() > 1000 && $(this).scrollTop() < 1600)
+            {
+                $('.one-link').css({"opacity":"1"});
+            } else {
+                $('.one-link').css({"opacity":"0"});
+            }
+            if($(this).scrollTop() > 1600 && $(this).scrollTop() < 2200)
+            {
+                $('.two-link').css({"opacity":"1"});
+            } else {
+                $('.two-link').css({"opacity":"0"});
+            }
+            if($(this).scrollTop() > 2200 && $(this).scrollTop() < 2800)
+            {
+                $('.three-link').css({"opacity":"1"});
+            } else {
+                $('.three-link').css({"opacity":"0"});
+            }
+            if($(this).scrollTop() > 2800 && $(this).scrollTop() < 3400)
+            {
+                $('.four-link').css({"opacity":"1"});
+            } else {
+                $('.four-link').css({"opacity":"0"});
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="top">
+    </div>
+    <div id="background">
+    </div>
+    <div id="navbar">
+        <a id="logo" onclick="$('html, body').animate({scrollTop: $('#top').offset().top}, 1000);"></a>
+        <p id="logo-title"> workshop </p>
+        <div class="link">
+            <div class="inner-link four-link" style="background: #19bb9b;" onclick="$('html, body').animate({scrollTop: $('.four').offset().top}, 1000);"></div>
+        </div>
+        <div class="link">
+            <div class="inner-link three-link" style="background: #B3B3B3;" onclick="$('html, body').animate({scrollTop: $('.three').offset().top}, 1000);"></div>
+        </div>
+        <div class="link">
+            <div class="inner-link two-link" style="background: #7ac100;" onclick="$('html, body').animate({scrollTop: $('.two').offset().top}, 1000);"></div>
+        </div>
+        <div class="link">
+            <div class="inner-link one-link" style="background: #0096ff;" onclick="$('html, body').animate({scrollTop: $('.one').offset().top}, 1000);"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div id="spacer1"></div>
+            <p id="banner-header"> Mobile applications <span class="highlight">built</span> </p>
+            <p id="banner-header"> for <span id="typed"></span> </p>
+        </div>
+    </div>
+    <div id="banner">
+        <img id="banner-logo" src="banner-logo.svg"></img>
+    </div>
+    <div class="container">
+        <div class="content">
+            <h1> We make apps </h1>
+            <h2> ... </h2>
+            <p class="blurb"> that demonstrate the power of Salesforce1. In our products we strive to be innovative and creative, focused on bringing useful and simple software to enterprises. We strive to change the stigma that enterprise software will always be difficult and unpleasant by creating beautiful, fluid, and intuitive tools for the everyday employee. This is a portfolio to showcase what we've made so far. </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="picture one"></div>
+        <div class="picture mobile"></div>
+        <div class="description one">
+            <h2 style="color: #0096ff;"> Rollcall </h2>
+            <h2> ... </h2>
+            <p class="blurb"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            <br><br>
+            <style>
+                #rollcall:hover {
+                    color: #0096ff;
+                    border: 1px solid #0096ff;
+                }
+            </style>
+            <a class="button" id="rollcall" href="#"> View on AppExchange </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="picture mobile"></div>
+        <div class="description two">
+            <h2 style="color: #7ac100;"> Checker </h2>
+            <h2> ... </h2>
+            <p class="blurb"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            <br><br>
+            <style>
+                #checker:hover {
+                    color: #7ac100;
+                    border: 1px solid #7ac100;
+                }
+            </style>
+            <a class="button" id="checker" href="#"> View on AppExchange </a>
+        </div>
+        <div class="picture two"></div>
+    </div>
+    <div class="container">
+        <div class="picture three"></div>
+        <div class="picture mobile"></div>
+        <div class="description three">
+            <h2 style="color: #B3B3B3;"> IoU </h2>
+            <h2> ... </h2>
+            <p class="blurb"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            <br><br>
+            <style>
+                #iou:hover {
+                    color: #000000;
+                    border: 1px solid #000000;
+                }
+            </style>
+            <a class="button" id="iou" href="#"> View on AppExchange </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="picture mobile"></div>
+        <div class="description four">
+            <h2 style="color: #19bb9b;"> Approval Central </h2>
+            <h2> ... </h2>
+            <p class="blurb"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            <br><br>
+            <style>
+                #approval-central:hover {
+                    color: #19bb9b;
+                    border: 1px solid #19bb9b;
+                }
+            </style>
+            <a class="button" id="approval-central" href="#"> View on AppExchange </a>
+        </div>
+        <div class="picture four"></div>
+    </div>
+</body>
+</html>
